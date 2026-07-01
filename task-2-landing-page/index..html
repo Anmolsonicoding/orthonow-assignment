@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book an Orthopaedic Consultation in Bengaluru | OrthoNow</title>
+<meta name="description" content="Get an expert orthopaedic opinion for knee or back pain. Book your consultation at OrthoNow's Bengaluru clinics in under a minute.">
+
+<!--
+  PERFORMANCE NOTES (for PageSpeed Insights Mobile 90+):
+  - No external requests at all: no web fonts, no CDN libraries, no images.
+    Every visual element (stars, icon) is inline SVG or pure CSS to avoid
+    network round-trips and layout shift from late-loading assets.
+  - System font stack only -> zero font download, zero FOIT/FOUT.
+  - CSS and JS are inlined in this single file (single network request total).
+  - No render-blocking resources, no third-party scripts.
+  - All interactive elements sized for touch (min 44px tap targets).
+-->
+
+<style>
+  :root {
+    --navy: #0f2a3f;
+    --teal: #0f8b8d;
+    --teal-dark: #0b6e70;
+    --bg: #f7faf9;
+    --text: #1c2b30;
+    --muted: #5b6b70;
+    --white: #ffffff;
+    --error: #c0392b;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* ---------- Header / Trust strip ---------- */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 14px 0;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+  .header-phone {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    text-decoration: none;
+    background: var(--teal);
+    padding: 8px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 32px 0 20px;
+    text-align: left;
+  }
+  .hero h1 {
+    font-size: 26px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .hero .sub {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .trust-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+  .stars { display: flex; gap: 2px; }
+  .stars svg { width: 14px; height: 14px; fill: #f0a500; }
+
+  /* ---------- Form Card ---------- */
+  .form-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 22px 18px;
+    box-shadow: 0 8px 24px rgba(15, 42, 63, 0.10);
+    margin-bottom: 22px;
+  }
+  .form-card h2 {
+    font-size: 17px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .form-card .form-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .field {
+    margin-bottom: 14px;
+  }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%;
+    padding: 14px 14px;
+    font-size: 16px; /* >=16px prevents iOS auto-zoom on focus */
+    border: 1.5px solid #d6dde0;
+    border-radius: 10px;
+    background: var(--white);
+    color: var(--text);
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+  .field .err-msg {
+    display: none;
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 6px;
+  }
+  .field.has-error input { border-color: var(--error); }
+  .field.has-error .err-msg { display: block; }
+
+  .phone-row {
+    display: flex;
+    gap: 8px;
+  }
+  .phone-row .prefix {
+    flex: 0 0 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #d6dde0;
+    border-radius: 10px;
+    font-size: 15px;
+    color: var(--muted);
+    background: #f0f3f3;
+  }
+  .phone-row input { flex: 1; }
+
+  .cta-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--teal);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    min-height: 50px;
+  }
+  .cta-btn:active { background: var(--teal-dark); }
+
+  .microcopy {
+    font-size: 11.5px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* ---------- Thank-you state ---------- */
+  .thank-you {
+    display: none;
+    text-align: center;
+    padding: 20px 4px 6px;
+  }
+  .thank-you.show { display: block; }
+  .form-card.submitted .booking-form { display: none; }
+  .thank-you .check {
+    width: 52px; height: 52px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: #e3f5ee;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .thank-you .check svg { width: 26px; height: 26px; }
+  .thank-you h2 { font-size: 18px; color: var(--navy); margin-bottom: 6px; }
+  .thank-you p { font-size: 14px; color: var(--muted); }
+
+  /* ---------- Credentials / trust section ---------- */
+  .credentials {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 28px;
+  }
+  .credentials h3 {
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .cred-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+  .cred-grid .num {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--teal-dark);
+  }
+  .cred-grid .label {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 18px 0 28px;
+  }
+
+  /* ---------- Sticky mobile CTA ---------- */
+  .sticky-cta {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--white);
+    border-top: 1px solid #e1e6e7;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+    display: none;
+    z-index: 50;
+  }
+  .sticky-cta button {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--teal);
+    border: none;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 520px) {
+    .sticky-cta { display: block; }
+    body { padding-bottom: 70px; } /* room for sticky bar */
+  }
+
+  @media (min-width: 521px) {
+    .wrap { max-width: 520px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-inner">
+    <span class="logo">OrthoNow</span>
+    <a class="header-phone" href="tel:+918012345678" data-cta="call-now" data-position="header">Call Now</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <h1>Knee or back pain slowing you down at work? Get an expert orthopaedic opinion.</h1>
+    <p class="sub">Book a consultation with OrthoNow's orthopaedic specialists in Bengaluru &mdash; in-person or video, this week.</p>
+
+    <div class="trust-row">
+      <span class="stars" aria-hidden="true">
+        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6z"/></svg>
+        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6z"/></svg>
+        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6z"/></svg>
+        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6z"/></svg>
+        <svg viewBox="0 0 20 20"><path d="M10 1l2.6 5.9 6.4.6-4.8 4.3 1.4 6.2L10 14.9 4.4 18l1.4-6.2L1 7.5l6.4-.6z"/></svg>
+      </span>
+      <span>4.7/5 from 2,300+ patients &middot; 9 clinics across Bengaluru, Hyderabad &amp; Chennai</span>
+    </div>
+
+    <div class="form-card" id="formCard">
+      <div class="booking-form" id="bookingForm">
+        <h2>Book your free consultation slot</h2>
+        <p class="form-sub">We'll call you within 30 minutes to confirm a time.</p>
+
+        <form id="leadForm" novalidate>
+          <div class="field" id="nameField">
+            <label for="patientName">Full name</label>
+            <input type="text" id="patientName" name="name" autocomplete="name" placeholder="e.g. Priya Sharma">
+            <span class="err-msg">Please enter your name.</span>
+          </div>
+
+          <div class="field" id="phoneField">
+            <label for="patientPhone">Mobile number</label>
+            <div class="phone-row">
+              <span class="prefix">+91</span>
+              <input type="tel" id="patientPhone" name="phone" autocomplete="tel" inputmode="numeric" maxlength="10" placeholder="98765 43210">
+            </div>
+            <span class="err-msg">Enter a valid 10-digit mobile number.</span>
+          </div>
+
+          <button type="submit" class="cta-btn">Book My Free Consultation</button>
+          <p class="microcopy">No spam. Your number is only used to confirm your appointment.</p>
+        </form>
+      </div>
+
+      <div class="thank-you" id="thankYou">
+        <div class="check">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0f8b8d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2>You're booked in!</h2>
+        <p>Our care team will call you within 30 minutes to confirm your slot and preferred clinic.</p>
+      </div>
+    </div>
+
+    <div class="credentials">
+      <h3>Why patients choose OrthoNow</h3>
+      <div class="cred-grid">
+        <div>
+          <div class="num">9</div>
+          <div class="label">Clinics, 3 cities</div>
+        </div>
+        <div>
+          <div class="num">15+ yrs</div>
+          <div class="label">Avg. specialist experience</div>
+        </div>
+        <div>
+          <div class="num">40k+</div>
+          <div class="label">Patients treated</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  &copy; 2026 OrthoNow. All consultations are with registered orthopaedic specialists.
+</footer>
+
+<div class="sticky-cta" id="stickyCta">
+  <button type="button" id="stickyBtn">Book My Free Consultation</button>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  // Ensure dataLayer exists even if GTM container hasn't loaded yet.
+  window.dataLayer = window.dataLayer || [];
+
+  var form = document.getElementById('leadForm');
+  var nameInput = document.getElementById('patientName');
+  var phoneInput = document.getElementById('patientPhone');
+  var nameField = document.getElementById('nameField');
+  var phoneField = document.getElementById('phoneField');
+  var formCard = document.getElementById('formCard');
+  var thankYou = document.getElementById('thankYou');
+  var stickyCta = document.getElementById('stickyBtn');
+
+  // Only allow digits in the phone field as the user types.
+  phoneInput.addEventListener('input', function () {
+    phoneInput.value = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  function validate() {
+    var valid = true;
+
+    if (nameInput.value.trim().length < 2) {
+      nameField.classList.add('has-error');
+      valid = false;
+    } else {
+      nameField.classList.remove('has-error');
+    }
+
+    // Indian mobile numbers: 10 digits, starting 6-9.
+    var phoneOk = /^[6-9]\d{9}$/.test(phoneInput.value.trim());
+    if (!phoneOk) {
+      phoneField.classList.add('has-error');
+      valid = false;
+    } else {
+      phoneField.classList.remove('has-error');
+    }
+
+    return valid;
+  }
+
+  function submitLead(e) {
+    if (e) e.preventDefault();
+    if (!validate()) return;
+
+    // ---- GTM dataLayer push on successful submit (NOT on page load) ----
+    window.dataLayer.push({
+      event: 'consultation_form_submitted',
+      form_id: 'consultation_lead_form',
+      campaign_name: 'expert_orthopaedic_opinion_blr',
+      page_location: window.location.href,
+      lead_source: 'Google Ads - Consultation Landing Page'
+    });
+
+    // In production: this is where the fetch() call to the backend
+    // (which then talks to HubSpot + Karix WhatsApp + Google Ads
+    // server-side conversion) would go. See Task 03 for that architecture.
+    // Intentionally omitted here since this page must run standalone
+    // with no server.
+
+    formCard.classList.add('submitted');
+    thankYou.classList.add('show');
+  }
+
+  form.addEventListener('submit', submitLead);
+
+  // Sticky mobile CTA scrolls to and focuses the form instead of
+  // duplicating submit logic.
+  stickyCta.addEventListener('click', function () {
+    document.getElementById('bookingForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    nameInput.focus();
+  });
+})();
+</script>
+
+</body>
+</html>
